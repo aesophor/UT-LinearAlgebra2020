@@ -77,7 +77,7 @@ class Fraction {
 
  private:
   Fraction Simplify() const {
-    int gcd = std::__gcd(n_, d_);
+    const int gcd = std::__gcd(n_, d_);
     return Fraction(n_ / gcd, d_ / gcd);
   }
 
