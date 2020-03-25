@@ -1,7 +1,7 @@
 ## Gauss Jordan Elimination
-* For implementation details, see `Matrix::Rref()` in [`src/matrix.h`](https://github.com/aesophor/matricks/blob/master/src/matrix.h).
+* For implementation details, see `Matrix::Rref()` in [`src/matrix.h`](https://github.com/aesophor/UT-LinearAlgebra2020/blob/master/src/matrix.h).
 
-* Arithmetic operations are carried out using fractions (see [`src/fraction.h`](https://github.com/aesophor/matricks/blob/master/src/fraction.h)).
+* Arithmetic operations are carried out using fractions (see [`src/fraction.h`](https://github.com/aesophor/UT-LinearAlgebra2020/blob/master/src/fraction.h)).
 
 ## Todo
 * Ideally, we should enforce size check on matrices at compile-time (currently it's only performed at runtime).
