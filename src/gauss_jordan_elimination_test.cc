@@ -4,11 +4,12 @@
 
 using namespace matricks;
 
+
 int main() {
-  Matrix<3, 4> m1 = {
-    {1, 1, 1, 5},
-    {2, 3, 5, 8},
-    {4, 0, 5, 2}
+  Matrix<3, 3> m1 = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
   };
 
   std::cout << "Original matrix:" << std::endl
@@ -29,5 +30,4 @@ int main() {
 
   std::cout << "Rref:" << std::endl
     << m2.Rref() << std::endl;
-
 }
