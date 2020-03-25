@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -flto -Os -Wall
+CXXFLAGS=-g -std=c++11 -flto -Os -Wall
 SRC=$(wildcard src/*.cc)
 BIN=main
 
