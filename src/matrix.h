@@ -8,12 +8,6 @@
 
 namespace matricks {
 
-struct MatrixPtr {
-  MatrixPtr() : row(), col() {}
-  size_t row;
-  size_t col;
-};
-
 template <size_t row_size, size_t col_size>
 class Matrix {
  public:
@@ -30,17 +24,23 @@ class Matrix {
 
   virtual ~Matrix() = default;
 
+
+  struct Ptr {
+    Ptr() : row(), col() {}
+    size_t row;
+    size_t col;
+  };
+
   Matrix<row_size, col_size>& Rref() {
     // Place a cursor in the top entry of the first non-zero column
     // of this matrix.
     // TODO: what if the elements in the first row are all zeroes?
-    MatrixPtr ptr;
+    Matrix::Ptr ptr;
     for (const auto& col : data_[0]) {
       if (col == 0) {
         ptr.col++;
       }
     }
-
 
     while (ptr.row < row_size && ptr.col < col_size) {
       // Step1. If the cursor entry is zero, swap the cursor row with
