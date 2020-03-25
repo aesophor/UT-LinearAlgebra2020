@@ -21,52 +21,52 @@ class Fraction {
   virtual ~Fraction() = default;
 
 
-  Fraction operator +(const Fraction& other) const {
+  inline Fraction operator +(const Fraction& other) const {
     return Fraction(n_ * other.d_ + other.n_ * d_, d_ * other.d_).Simplify();
   }
 
-  Fraction operator -(const Fraction& other) const {
+  inline Fraction operator -(const Fraction& other) const {
     return Fraction(n_ * other.d_ - other.n_ * d_, d_ * other.d_).Simplify();
   }
 
-  Fraction operator *(const Fraction& other) const {
+  inline Fraction operator *(const Fraction& other) const {
     return Fraction(n_ * other.n_, d_ * other.d_).Simplify();
   }
 
-  Fraction operator /(const Fraction& other) const {
+  inline Fraction operator /(const Fraction& other) const {
     return Fraction(n_ * other.d_, d_ * other.n_).Simplify();
   }
 
 
-  Fraction& operator =(const Fraction& other) {
+  inline Fraction& operator =(const Fraction& other) {
     n_ = other.n_;
     d_ = other.d_;
     return *this;
   }
 
-  Fraction& operator +=(const Fraction& other) {
+  inline Fraction& operator +=(const Fraction& other) {
     return *this = *this + other;
   }
 
-  Fraction& operator -=(const Fraction& other) {
+  inline Fraction& operator -=(const Fraction& other) {
     return *this = *this - other;
   }
 
-  Fraction& operator *=(const Fraction& other) {
+  inline Fraction& operator *=(const Fraction& other) {
     return *this = *this * other;
   }
 
-  Fraction& operator /=(const Fraction& other) {
+  inline Fraction& operator /=(const Fraction& other) {
     return *this = *this / other;
   }
 
-  bool operator ==(const Fraction& other) const {
+  inline bool operator ==(const Fraction& other) const {
     const Fraction f1 = this->Simplify();
     const Fraction f2 = other.Simplify();
     return f1.n_ == f2.n_ && f1.d_ == f2.d_;
   }
 
-  bool operator !=(const Fraction& other) const {
+  inline bool operator !=(const Fraction& other) const {
     return !(*this == other);
   }
 
@@ -76,7 +76,7 @@ class Fraction {
   }
 
  private:
-  Fraction Simplify() const {
+  inline Fraction Simplify() const {
     const int gcd = std::__gcd(n_, d_);
     return Fraction(n_ / gcd, d_ / gcd);
   }
