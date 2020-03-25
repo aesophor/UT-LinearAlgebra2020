@@ -12,8 +12,19 @@ template <size_t row_size, size_t col_size>
 class Matrix {
  public:
   Matrix(std::initializer_list<std::initializer_list<Fraction>> init_list) {
+    // TODO: size check should be performed at compile-time, not at runtime,
+    // but std::initializer_list::size() is a horrible piece of shit because
+    // for some reason it's not constexpr. See:
+    // https://stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
+    if (init_list.size() > row_size) {
+      throw std::length_error("Illegal matrix row_size");
+    }
+
     data_.reserve(row_size);
     for (const auto& row : init_list) {
+      if (row.size() > col_size) {
+        throw std::length_error("Illegal matrix col_size");
+      }
       data_.push_back({});
       data_.back().reserve(col_size);
       for (const auto& col : row) {
