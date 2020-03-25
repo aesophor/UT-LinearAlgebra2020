@@ -4,20 +4,20 @@
 #include <iostream>
 #include <initializer_list>
 #include <vector>
+#include "fraction.h"
 
 namespace matricks {
 
 struct MatrixPtr {
- public:
   MatrixPtr() : row(), col() {}
   size_t row;
   size_t col;
 };
 
-template <typename T, size_t row_size, size_t col_size>
+template <size_t row_size, size_t col_size>
 class Matrix {
  public:
-  Matrix(std::initializer_list<std::initializer_list<T>> init_list) {
+  Matrix(std::initializer_list<std::initializer_list<Fraction>> init_list) {
     data_.reserve(row_size);
     for (const auto& row : init_list) {
       data_.push_back({});
@@ -30,7 +30,7 @@ class Matrix {
 
   virtual ~Matrix() = default;
 
-  Matrix<T, row_size, col_size>& Rref() {
+  Matrix<row_size, col_size>& Rref() {
     // Place a cursor in the top entry of the first non-zero column
     // of this matrix.
     // TODO: what if the elements in the first row are all zeroes?
@@ -60,8 +60,8 @@ class Matrix {
       //        subtracting suitable multiples of the cursor row from
       //        the other rows.
       for (size_t i = 0; i < row_size; i++) {
-        int ptr_entry = data_[ptr.row][ptr.col];
-        int current_entry = data_[i][ptr.col];
+        Fraction ptr_entry = data_[ptr.row][ptr.col];
+        Fraction current_entry = data_[i][ptr.col];
 
         if (current_entry == 0 || i == ptr.row) {
           continue;
@@ -95,7 +95,7 @@ class Matrix {
     return *this;
   }
 
-  friend std::ostream& operator<< (std::ostream& os, const Matrix& m) {
+  friend std::ostream& operator <<(std::ostream& os, const Matrix& m) {
     for (const auto& row : m.data_) {
       for (const auto& col : row) {
         std::cout << col << " ";
@@ -106,31 +106,31 @@ class Matrix {
   }
 
  private:
-  std::vector<T> RowSub(size_t row, const std::vector<T>& other_row_vector) {
-    std::vector<T> row_vector(data_[row]);
+  std::vector<Fraction> RowSub(size_t row, const std::vector<Fraction>& other_row_vector) {
+    std::vector<Fraction> row_vector(data_[row]);
     for (size_t i = 0; i < other_row_vector.size(); i++) {
       row_vector[i] -= other_row_vector[i];
     }
     return row_vector;
   }
 
-  std::vector<T> RowMul(size_t row, T val) {
-    std::vector<T> row_vector(data_[row]);
+  std::vector<Fraction> RowMul(size_t row, Fraction val) {
+    std::vector<Fraction> row_vector(data_[row]);
     for (auto& col : row_vector) {
       col *= val;
     }
     return row_vector;
   }
 
-  std::vector<T> RowDiv(size_t row, T val) {
-    std::vector<T> row_vector(data_[row]);
+  std::vector<Fraction> RowDiv(size_t row, Fraction val) {
+    std::vector<Fraction> row_vector(data_[row]);
     for (auto& col : row_vector) {
       col /= val;
     }
     return row_vector;
   }
 
-  std::vector<std::vector<T>> data_;
+  std::vector<std::vector<Fraction>> data_;
 };
 
 }  // namespace matricks
