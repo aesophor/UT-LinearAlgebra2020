@@ -1,13 +1,14 @@
 CXX=g++
-CXXFLAGS=-g -std=c++11 -flto -Os -Wall
-SRC=$(wildcard src/*.cc)
-BIN=gauss_jordan_elimination_test
+CXXFLAGS=-g -std=c++11 -flto -Os -Wall -Imatricks
 
-all:
-	$(CXX) -o $(BIN) $(SRC) $(CXXFLAGS)
+%: %.cc
+	$(CXX) -o $@ $< $(CXXFLAGS)
+
+test:
+	make tests/gauss_jordan_elimination_test
 
 clean:
-	rm $(BIN)
+	rm tests/*_test
 
 run:
 	./main

@@ -36,8 +36,8 @@ class Matrix {
   virtual ~Matrix() = default;
 
 
-  struct Ptr {
-    Ptr() : row(), col() {}
+  struct Cursor {
+    Cursor() : row(), col() {}
     size_t row;
     size_t col;
   };
@@ -46,57 +46,57 @@ class Matrix {
     // Place a cursor in the top entry of the first non-zero column
     // of this matrix.
     // TODO: what if the elements in the first row are all zeroes?
-    Matrix::Ptr ptr;
+    Matrix::Cursor cursor;
     for (const auto& col : data_[0]) {
       if (col == 0) {
-        ptr.col++;
+        cursor.col++;
       }
     }
 
-    while (ptr.row < row_size && ptr.col < col_size) {
+    while (cursor.row < row_size && cursor.col < col_size) {
       // Step1. If the cursor entry is zero, swap the cursor row with
       //        some row below to make the cursor entry non-zero.
-      if (data_[ptr.row][ptr.col] == 0) {
+      if (data_[cursor.row][cursor.col] == 0) {
         for (size_t i = 1; i < row_size; i++) {
-          if (data_[i][ptr.col] != 0) {
-            std::swap(data_[ptr.row], data_[i]);
+          if (data_[i][cursor.col] != 0) {
+            std::swap(data_[cursor.row], data_[i]);
           }
         }
       }
 
       // Step2: Divide the cursor row by the cursor entry
-      data_[ptr.row] = RowDiv(ptr.row, data_[ptr.row][ptr.col]);
+      data_[cursor.row] = RowDiv(cursor.row, data_[cursor.row][cursor.col]);
 
       // Step3: Eliminate all other entries in the cursor column, by
       //        subtracting suitable multiples of the cursor row from
       //        the other rows.
       for (size_t i = 0; i < row_size; i++) {
-        Fraction ptr_entry = data_[ptr.row][ptr.col];
-        Fraction current_entry = data_[i][ptr.col];
+        Fraction cursor_entry = data_[cursor.row][cursor.col];
+        Fraction current_entry = data_[i][cursor.col];
 
-        if (current_entry == 0 || i == ptr.row) {
+        if (current_entry == 0 || i == cursor.row) {
           continue;
         }
-        data_[i] = RowSub(i, RowMul(ptr.row, current_entry / ptr_entry));
+        data_[i] = RowSub(i, RowMul(cursor.row, current_entry / cursor_entry));
       }
 
       // Step4: Move the cursor one row down and one column to the right.
       //        If the new cursor entry and all entries below are zero,
       //        move the cursor to the next columns (Remaining in the
       //        same row). Repeat the last step if necessary.
-      ptr.row++;
-      ptr.col++;
+      cursor.row++;
+      cursor.col++;
 
       bool is_checking_zero = true;
-      while (is_checking_zero && ptr.row < row_size && ptr.col < col_size) {
-        for (size_t i = ptr.row; i < row_size; i++) {
-          if (data_[i][ptr.col] != 0) {
+      while (is_checking_zero && cursor.row < row_size && cursor.col < col_size) {
+        for (size_t i = cursor.row; i < row_size; i++) {
+          if (data_[i][cursor.col] != 0) {
             is_checking_zero = false;
             break;
           }
         }
         if (is_checking_zero) {
-          ptr.col++;
+          cursor.col++;
         }
       }
 
