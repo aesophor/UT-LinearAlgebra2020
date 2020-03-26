@@ -21,7 +21,7 @@ Include headers:
 #include <matricks/matrix.h>
 ```
 
-Declare a matrix:
+Declare a 3x3 matrix:
 ```
 Matrix<3, 3> m1 = {
   {1, 2, 3},
@@ -32,7 +32,7 @@ Matrix<3, 3> m1 = {
 
 Reduce matrix `m1` to rref:
 ```
-m1.Rref();
+m1.Rref();  // this will modify the matrix itself, and return the reference to the matrix.
 ```
 
 ## Examples
