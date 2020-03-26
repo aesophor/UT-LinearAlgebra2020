@@ -9,8 +9,19 @@
 ## Requirements
 * g++ (or any C++11 compilant compiler)
 
+## Installation
+```
+$ sudo make install
+```
+This will copy the `matricks` directory into `/usr/local/include/`.
+
 ## Usage
-Declare a matrix like this:
+Include headers:
+```
+#include <matricks/matrix.h>
+```
+
+Declare a matrix:
 ```
 Matrix<3, 3> m1 = {
   {1, 2, 3},
@@ -19,7 +30,7 @@ Matrix<3, 3> m1 = {
 };
 ```
 
-Reduce matrix `m1` to rref like this:
+Reduce matrix `m1` to rref:
 ```
 m1.Rref();
 ```
