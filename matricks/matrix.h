@@ -113,6 +113,11 @@ class Matrix {
   }
 
   bool operator ==(const Matrix<row_size, col_size>& m) const {
+    if (data_.size() != m.data_.size() ||
+        data_.front().size() != m.data_.front().size()) {
+      return false;
+    }
+
     for (size_t i = 0; i < row_size; i++) {
       for (size_t j = 0; j < col_size; j++) {
         if (data_[i][j] != m[i][j]) {
