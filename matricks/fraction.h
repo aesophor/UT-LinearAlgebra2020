@@ -1,3 +1,4 @@
+// Copyright (c) 2020 Marco Wang <m.aesophor@gmail.com>
 #ifndef MATRICKS_FRACTION_H_
 #define MATRICKS_FRACTION_H_
 

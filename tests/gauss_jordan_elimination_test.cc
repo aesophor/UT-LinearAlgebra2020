@@ -1,6 +1,7 @@
+// Copyright (c) 2018-2020 Marco Wang <m.aesophor@gmail.com>
 #include <iostream>
 
-#include "matrix.h"
+#include <matricks/matrix.h>
 
 using namespace matricks;
 

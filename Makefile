@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -std=c++11 -flto -Os -Wall -Imatricks
+CXXFLAGS=-g -std=c++11 -flto -Os -Wall -I.
 
 %: %.cc
 	$(CXX) -o $@ $< $(CXXFLAGS)

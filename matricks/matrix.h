@@ -1,5 +1,6 @@
-#ifndef MATRICKS_H_
-#define MATRICKS_H_
+// Copyright (c) 2020 Marco Wang <m.aesophor@gmail.com>
+#ifndef MATRICKS_MATRIX_H_
+#define MATRICKS_MATRIX_H_
 
 #include <iostream>
 #include <initializer_list>
@@ -146,4 +147,4 @@ class Matrix {
 
 }  // namespace matricks
 
-#endif  // MATRICKS_H_
+#endif  // MATRICKS_MATRIX_H_
