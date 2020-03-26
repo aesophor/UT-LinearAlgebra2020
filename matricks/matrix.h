@@ -107,6 +107,26 @@ class Matrix {
     return *this;
   }
 
+
+  const std::vector<Fraction>& operator [](int row) const {
+    return data_[row];
+  }
+
+  bool operator ==(const Matrix<row_size, col_size>& m) const {
+    for (size_t i = 0; i < row_size; i++) {
+      for (size_t j = 0; j < col_size; j++) {
+        if (data_[i][j] != m[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  bool operator !=(const Matrix<row_size, col_size>& m) const {
+    return !(*this == m);
+  }
+
   friend std::ostream& operator <<(std::ostream& os, const Matrix& m) {
     for (const auto& row : m.data_) {
       for (const auto& col : row) {
