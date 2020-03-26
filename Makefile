@@ -11,5 +11,9 @@ test:
 clean:
 	rm tests/*_test
 
-run:
-	./main
+install:
+	mkdir -p /usr/local/include/matricks
+	install -D -m755 matricks/* /usr/local/include/matricks
+
+uninstall:
+	rm -rf /usr/local/include/matricks
