@@ -13,6 +13,8 @@ template <size_t row_size, size_t col_size>
 class Matrix {
  public:
   Matrix(std::initializer_list<std::initializer_list<Fraction>> init_list) {
+    static_assert(row_size != 0 && col_size != 0);
+
     // TODO: size check should be performed at compile-time, not at runtime,
     // but std::initializer_list::size() is a horrible piece of shit because
     // for some reason it's not constexpr. See:
