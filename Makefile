@@ -5,6 +5,7 @@ CXXFLAGS=-g -std=c++11 -flto -Os -Wall -I.
 	$(CXX) -o $@ $< $(CXXFLAGS)
 
 test:
+	make tests/fraction_arithmetic_test
 	make tests/gauss_jordan_elimination_test
 
 clean:
